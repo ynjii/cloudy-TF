@@ -13,6 +13,8 @@ variable "ec2_instance_type" {
 variable "ec2_ami_id" {
   type        = string
   description = "EC2에서 사용할 AMI ID"
+  default    = "ami-0891aeb92f786d7a2" #서울 리전(ap-northeast-2) 기준으로 2025년 2월 20일자 Amazon Linux 2(GP2) AMI ID
+
 }
 
 variable "rds_engine" {
