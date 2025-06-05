@@ -364,7 +364,7 @@ resource "aws_db_subnet_group" "main" {
 resource "aws_db_instance" "main" {
   identifier              = "${var.project_name}-db"
   engine                  = var.rds_engine
-  engine_version          = "10.5"
+  engine_version          = "8.0.33"
   instance_class          = var.rds_instance_class
   allocated_storage       = local.db_allocated_storage
   max_allocated_storage   = 100
