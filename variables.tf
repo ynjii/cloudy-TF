@@ -1,59 +1,44 @@
-variable "aws_region" {
-  description = "AWS region to deploy resources"
-  type        = string
-  default     = "ap-northeast-2" # Seoul region
-}
-
 variable "project_name" {
-  description = "Project name used for resource naming"
   type        = string
-  default     = "terraform-demo"
-}
-
-variable "vpc_cidr" {
-  description = "CIDR block for VPC"
-  type        = string
-  default     = "10.0.0.0/16"
-}
-
-variable "public_subnet_cidrs" {
-  description = "CIDR blocks for public subnets (for ALB and EC2)"
-  type        = list(string)
-  default     = ["10.0.1.0/24", "10.0.2.0/24"]
-}
-
-variable "private_rds_subnet_cidrs" {
-  description = "CIDR blocks for private RDS subnets"
-  type        = list(string)
-  default     = ["10.0.5.0/24", "10.0.6.0/24"]
+  description = "AWS 리소스 태그로 사용될 프로젝트 이름"
 }
 
 variable "ec2_instance_type" {
-  description = "EC2 instance type"
   type        = string
-  default     = "t3.medium"
+  default     = "t3.micro"
+  description = "EC2 인스턴스 타입"
 }
 
-variable "db_password" {
-  description = "RDS root user password"
+variable "ec2_ami_id" {
   type        = string
+  description = "EC2에서 사용할 AMI ID"
+}
+
+variable "rds_engine" {
+  type        = string
+  default     = "mysql"
+  description = "RDS 데이터베이스 엔진"
+}
+
+variable "rds_instance_class" {
+  type        = string
+  default     = "db.t3.micro"
+  description = "RDS 인스턴스 타입"
+}
+
+variable "rds_username" {
+  type        = string
+  description = "RDS 마스터 사용자 이름"
+}
+
+variable "rds_password" {
+  type        = string
+  description = "RDS 마스터 비밀번호"
   sensitive   = true
 }
 
-variable "db_instance_class" {
-  description = "RDS instance class"
+variable "allowed_ip" {
   type        = string
-  default     = "db.t3.small"
-}
-
-variable "db_allocated_storage" {
-  description = "Allocated storage for RDS in GB"
-  type        = number
-  default     = 20
-}
-
-variable "s3_bucket_name" {
-  description = "Name for the S3 bucket"
-  type        = string
-  default     = null
+  default     = "0.0.0.0/0"
+  description = "접근 허용할 IP 범위"
 }
