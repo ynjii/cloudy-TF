@@ -32,9 +32,10 @@ variable "rds_instance_class" {
 variable "rds_username" {
   type        = string
   description = "RDS 마스터 사용자 이름"
+  default = "rds-test"
 }
 
-variable "db_password" {
+variable "rds_password" {
   type        = string
   description = "RDS 마스터 비밀번호"
   sensitive   = true
