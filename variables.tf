@@ -34,7 +34,7 @@ variable "rds_username" {
   description = "RDS 마스터 사용자 이름"
 }
 
-variable "rds_password" {
+variable "db_password" {
   type        = string
   description = "RDS 마스터 비밀번호"
   sensitive   = true
