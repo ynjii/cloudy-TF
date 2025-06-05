@@ -27,7 +27,6 @@ terraform {
   required_version = ">= 1.2.0"
 }
 
-# (1) Provider: Region을 고정값(서울 리전)으로 지정했습니다.
 provider "aws" {
   region = "ap-northeast-2"
 }
