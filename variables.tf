@@ -1,6 +1,7 @@
 variable "project_name" {
   type        = string
   description = "AWS 리소스 태그로 사용될 프로젝트 이름"
+  default = "my-aws-project"
 }
 
 variable "ec2_instance_type" {
