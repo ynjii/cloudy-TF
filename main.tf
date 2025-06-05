@@ -228,13 +228,13 @@ resource "aws_security_group" "web_server" {
   }
 
   tags = {
-    Name = "${var.project_name}-web-server-sg"
+    Name = "${var.project_name}-web-server-sg-v2"
   }
 }
 
 ### RDS 보안 그룹
 resource "aws_security_group" "rds" {
-  name        = "${var.project_name}-rds-sg"
+  name        = "${var.project_name}-rds-sg-v2"
   description = "Security group for RDS instances"
   vpc_id      = aws_vpc.main.id
 
@@ -257,7 +257,7 @@ resource "aws_security_group" "rds" {
   }
 
   tags = {
-    Name = "${var.project_name}-rds-sg"
+    Name = "${var.project_name}-rds-sg-v2"
   }
 }
 
@@ -291,7 +291,7 @@ resource "aws_instance" "web_server_1" {
   EOF
 
   tags = {
-    Name = "${var.project_name}-web-server-1"
+    Name = "${var.project_name}-web-server-2"
   }
 }
 
@@ -299,7 +299,7 @@ resource "aws_instance" "web_server_1" {
 # ALB (Application Load Balancer)
 ########################################################
 resource "aws_lb" "main" {
-  name                             = "${var.project_name}-alb"
+  name                             = "${var.project_name}-alb-v2"
   internal                         = false
   load_balancer_type               = "application"
   security_groups                  = [aws_security_group.alb.id]
@@ -308,12 +308,12 @@ resource "aws_lb" "main" {
   enable_cross_zone_load_balancing = true
 
   tags = {
-    Name = "${var.project_name}-alb"
+    Name = "${var.project_name}-alb-v2"
   }
 }
 
 resource "aws_lb_target_group" "main" {
-  name     = "${var.project_name}-tg"
+  name     = "${var.project_name}-tg-v2"
   port     = 80
   protocol = "HTTP"
   vpc_id   = aws_vpc.main.id
@@ -328,7 +328,7 @@ resource "aws_lb_target_group" "main" {
   }
 
   tags = {
-    Name = "${var.project_name}-tg"
+    Name = "${var.project_name}-tg-v2"
   }
 }
 
@@ -353,16 +353,16 @@ resource "aws_lb_listener" "http" {
 # RDS (MySQL/MariaDB 등 엔진을 변수로 받음)
 ########################################################
 resource "aws_db_subnet_group" "main" {
-  name       = "${var.project_name}-db-subnet-group"
+  name       = "${var.project_name}-db-subnet-group-v2"
   subnet_ids = [for subnet in aws_subnet.private_rds : subnet.id]
 
   tags = {
-    Name = "${var.project_name}-db-subnet-group"
+    Name = "${var.project_name}-db-subnet-group-v2"
   }
 }
 
 resource "aws_db_instance" "main" {
-  identifier              = "${var.project_name}-db"
+  identifier              = "${var.project_name}-db-v2"
   engine                  = var.rds_engine
   engine_version          = "8.0.33"
   instance_class          = var.rds_instance_class
@@ -382,7 +382,7 @@ resource "aws_db_instance" "main" {
   maintenance_window      = "Mon:00:00-Mon:03:00"
 
   tags = {
-    Name = "${var.project_name}-db"
+    Name = "${var.project_name}-db-v2"
   }
 }
 
